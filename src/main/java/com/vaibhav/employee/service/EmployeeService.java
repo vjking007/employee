@@ -4,10 +4,12 @@ import com.vaibhav.employee.model.EmployeeEntity;
 import com.vaibhav.employee.repository.EmployeeRepository;
 import com.vaibhav.employee.response.EmployeeRequest;
 import com.vaibhav.employee.response.EmployeeResponse;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -31,17 +33,11 @@ public class EmployeeService {
                 employeeRepository.findAll();
 
         return employeeEntities.stream()
-                .map(et->
-                        new EmployeeResponse(
-                                et.getId(),
-                                et.getEmpName(),
-                                et.getJobName(),
-                                et.getSly(),
-                                et.getDte()))
+                .map(EmployeeResponse::new)
                 .toList();
     }
 
-    public String deleteEmployee(int id){
+    public String deleteEmployeeById(int id){
       return employeeRepository.findById(id)
                 .map(dlt-> {
                         employeeRepository.delete(dlt);
@@ -61,5 +57,11 @@ public class EmployeeService {
                     return "Updated Successfully.";
                 })
                 .orElse("Employee Not Updated. Please Check Id");
+    }
+
+    public EmployeeResponse getEmployeesById(int id){
+        return employeeRepository.findById(id)
+                          .map(EmployeeResponse::new)
+                          .orElseThrow(()->new EntityNotFoundException("Employee not found with id : "+id));
     }
 }
