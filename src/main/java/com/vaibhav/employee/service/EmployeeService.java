@@ -2,14 +2,13 @@ package com.vaibhav.employee.service;
 
 import com.vaibhav.employee.model.EmployeeEntity;
 import com.vaibhav.employee.repository.EmployeeRepository;
-import com.vaibhav.employee.response.EmployeeRequest;
-import com.vaibhav.employee.response.EmployeeResponse;
+import com.vaibhav.employee.response.EmployeeRequestDTO;
+import com.vaibhav.employee.response.EmployeeResponseDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -17,7 +16,7 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public String saveEmployee(EmployeeRequest employeeRequest){
+    public String saveEmployee(EmployeeRequestDTO employeeRequest){
         EmployeeEntity employee=new EmployeeEntity(employeeRequest);
         if(employee !=null){
             employeeRepository.save(employee);
@@ -27,13 +26,13 @@ public class EmployeeService {
         }
     }
 
-    public List<EmployeeResponse> getEmployees(){
+    public List<EmployeeResponseDTO> getEmployees(){
 
         List<EmployeeEntity> employeeEntities= (List<EmployeeEntity>)
                 employeeRepository.findAll();
 
         return employeeEntities.stream()
-                .map(EmployeeResponse::new)
+                .map(EmployeeResponseDTO::new)
                 .toList();
     }
 
@@ -46,7 +45,7 @@ public class EmployeeService {
                 .orElse("Employee Not Found");
     }
 
-    public String updateEmployee(EmployeeRequest employeeRequest, int id){
+    public String updateEmployee(EmployeeRequestDTO employeeRequest, int id){
         return employeeRepository.findById(id)
                 .map(dlt-> {
                     dlt.setEmpName(employeeRequest.getEmpName());
@@ -59,9 +58,9 @@ public class EmployeeService {
                 .orElse("Employee Not Updated. Please Check Id");
     }
 
-    public EmployeeResponse getEmployeesById(int id){
+    public EmployeeResponseDTO getEmployeesById(int id){
         return employeeRepository.findById(id)
-                          .map(EmployeeResponse::new)
+                          .map(EmployeeResponseDTO::new)
                           .orElseThrow(()->new EntityNotFoundException("Employee not found with id : "+id));
     }
 }

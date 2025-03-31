@@ -1,38 +1,19 @@
 package com.vaibhav.employee.response;
 
-import com.vaibhav.employee.model.EmployeeEntity;
-
 import java.time.LocalDate;
 
-public class EmployeeResponse {
+public class EmployeeRequestDTO {
 
-    private int id;
     private String empName;
     private String jobName;
     private double sly;
     private LocalDate date;
 
-    public EmployeeResponse(int id, String empName, String jobName, double sly, LocalDate date) {
-        this.id=id;
+    public EmployeeRequestDTO(String empName, String jobName, double sly) {
         this.empName = empName;
         this.jobName = jobName;
         this.sly = sly;
-        this.date = date;
-    }
-    public EmployeeResponse(EmployeeEntity employeeEntity) {
-        this.id=employeeEntity.getId();
-        this.empName = employeeEntity.getEmpName();
-        this.jobName = employeeEntity.getJobName();
-        this.sly = employeeEntity.getSly();
-        this.date = employeeEntity.getDte();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.date = LocalDate.now();
     }
 
     public String getEmpName() {

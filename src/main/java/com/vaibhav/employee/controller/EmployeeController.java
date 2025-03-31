@@ -1,7 +1,7 @@
 package com.vaibhav.employee.controller;
 
-import com.vaibhav.employee.response.EmployeeRequest;
-import com.vaibhav.employee.response.EmployeeResponse;
+import com.vaibhav.employee.response.EmployeeRequestDTO;
+import com.vaibhav.employee.response.EmployeeResponseDTO;
 import com.vaibhav.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +16,12 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping("/save")
-    public String saveEmployee(@RequestBody EmployeeRequest employeeRequest){
+    public String saveEmployee(@RequestBody EmployeeRequestDTO employeeRequest){
         return employeeService.saveEmployee(employeeRequest);
     }
 
     @GetMapping("/fetch")
-    public List<EmployeeResponse> getAllEmployees(){
+    public List<EmployeeResponseDTO> getAllEmployees(){
         return employeeService.getEmployees();
     }
 
@@ -31,12 +31,12 @@ public class EmployeeController {
     }
 
     @PutMapping("/update/{id}")
-    public String deleteEmployee(@PathVariable int id, @RequestBody EmployeeRequest employeeRequest){
+    public String deleteEmployee(@PathVariable int id, @RequestBody EmployeeRequestDTO employeeRequest){
         return employeeService.updateEmployee(employeeRequest, id);
     }
 
     @GetMapping("/{id}")
-    public EmployeeResponse getEmployeeById(@PathVariable int id){
+    public EmployeeResponseDTO getEmployeeById(@PathVariable int id){
         return employeeService.getEmployeesById(id);
     }
 }

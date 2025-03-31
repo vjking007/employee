@@ -1,6 +1,6 @@
 package com.vaibhav.employee.model;
 
-import com.vaibhav.employee.response.EmployeeRequest;
+import com.vaibhav.employee.response.EmployeeRequestDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -36,7 +36,7 @@ public class EmployeeEntity {
         this.dte = date;
     }
 
-    public EmployeeEntity(EmployeeRequest employeeRequest) {
+    public EmployeeEntity(EmployeeRequestDTO employeeRequest) {
         this.empName=employeeRequest.getEmpName();
         this.jobName=employeeRequest.getJobName();
         this.sly=employeeRequest.getSly();
