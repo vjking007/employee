@@ -26,12 +26,17 @@ public class EmployeeController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteEmployee(@PathVariable int id){
-        return employeeService.deleteEmployee(id);
+    public String deleteEmployeeById(@PathVariable int id){
+        return employeeService.deleteEmployeeById(id);
     }
 
     @PutMapping("/update/{id}")
     public String deleteEmployee(@PathVariable int id, @RequestBody EmployeeRequest employeeRequest){
         return employeeService.updateEmployee(employeeRequest, id);
+    }
+
+    @GetMapping("/{id}")
+    public EmployeeResponse getEmployeeById(@PathVariable int id){
+        return employeeService.getEmployeesById(id);
     }
 }

@@ -1,5 +1,7 @@
 package com.vaibhav.employee.response;
 
+import com.vaibhav.employee.model.EmployeeEntity;
+
 import java.time.LocalDate;
 
 public class EmployeeResponse {
@@ -16,6 +18,13 @@ public class EmployeeResponse {
         this.jobName = jobName;
         this.sly = sly;
         this.date = date;
+    }
+    public EmployeeResponse(EmployeeEntity employeeEntity) {
+        this.id=employeeEntity.getId();
+        this.empName = employeeEntity.getEmpName();
+        this.jobName = employeeEntity.getJobName();
+        this.sly = employeeEntity.getSly();
+        this.date = employeeEntity.getDte();
     }
 
     public int getId() {
