@@ -20,9 +20,9 @@ public class EmployeeService {
         EmployeeEntity employee=new EmployeeEntity(employeeRequest);
         if(employee !=null){
             employeeRepository.save(employee);
-            return "Employee Save Successfully";
+            return "Employee Saved Successfully";
         } else {
-            return "Employee Save Successfully";
+            return "Employee Not Saved Successfully";
         }
     }
 
